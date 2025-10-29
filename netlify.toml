@@ -1,8 +1,8 @@
 [build]
   # Comando de build para Angular
   command = "npm run build"
-  # Directorio donde se generan los archivos de producción
-  publish = "dist/whatsapp-clone"
+  # Directorio donde se generan los archivos de producción (corregido para plugin Angular)
+  publish = "dist/whatsapp-clone/browser"
 
 [build.environment]
   # Versión de Node.js
