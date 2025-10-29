@@ -5,8 +5,8 @@
   publish = "dist/whatsapp-clone/browser"
 
 [build.environment]
-  # Versión de Node.js
-  NODE_VERSION = "18"
+  # Versión de Node.js (actualizada para Angular CLI compatibility)
+  NODE_VERSION = "20"
 
 # Configuración para SPA (Single Page Application)
 [[redirects]]
