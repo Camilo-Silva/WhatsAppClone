@@ -23,7 +23,7 @@ interface User {
 
 // 👥 Usuarios principales para testing (solo 2 visibles en UI)
 const USERS: User[] = [
-  { id: 'user1', name: 'Veronica' },      // 📹 Videollamada
+  { id: 'user1', name: 'Verónica' },      // 📹 Videollamada
   { id: 'user2', name: 'Camila' },    // 📞 Llamada
   { id: 'user3', name: 'María Rodríguez' }, // Oculto (opcional)
   { id: 'user4', name: 'Pedro Martínez' }   // Oculto (opcional)
