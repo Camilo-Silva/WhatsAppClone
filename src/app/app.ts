@@ -41,8 +41,9 @@ const USERS: User[] = [
           <div class="bg-whatsapp-green text-white p-4 sticky top-0 z-10">
             <div class="flex justify-between items-center">
               <div>
-                <h1 class="text-lg font-semibold">VistoApp</h1>
-                <p class="text-xs opacity-75">{{getUserName(currentUserId())}}</p>
+                <h1 class="text-lg font-semibold">{{getChatPartnerName()}}</h1>
+                <!-- <p class="text-xs opacity-75">Conversando como: {{getUserName(currentUserId())}}</p> -->
+                <p class="text-xs opacity-75">VistoApp</p>
                 <!-- <p class="text-xs opacity-50">({{currentUserId()}})</p> -->
               </div>
 
@@ -324,6 +325,40 @@ export class App {
   // 👤 Obtener nombre del usuario por ID
   getUserName(userId: string): string {
     return USERS.find(user => user.id === userId)?.name || userId;
+  }
+
+  // 💬 Obtener nombre de la persona con quien estás chateando
+  getChatPartnerName(): string {
+    const currentUser = this.currentUserId();
+
+    // Encontrar quien es el otro participante activo en la conversación
+    const otherParticipants = this.getOtherParticipants();
+
+    if (otherParticipants.length === 1) {
+      // Conversación 1:1
+      return this.getUserName(otherParticipants[0]);
+    } else if (otherParticipants.length > 1) {
+      // Conversación grupal
+      return `Grupo (${otherParticipants.length + 1} participantes)`;
+    } else {
+      // Solo tú en la conversación
+      return "Esperando participantes...";
+    }
+  }
+
+  // 👥 Obtener otros participantes activos en la conversación
+  getOtherParticipants(): string[] {
+    const currentUser = this.currentUserId();
+    const messages = this.messages();
+
+    // Extraer todos los sender_uid únicos que NO sean el usuario actual
+    const otherUsers = [...new Set(
+      messages
+        .map(msg => msg.sender_uid)
+        .filter(uid => uid !== currentUser)
+    )];
+
+    return otherUsers;
   }
 
   // 👤 Obtener usuario actual completo
